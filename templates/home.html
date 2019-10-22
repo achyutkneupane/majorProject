@@ -1,0 +1,39 @@
+{%load static from staticfiles %}
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
+<link rel='stylesheet' href="{% static 'style.css' %}">
+
+<div class="container text-center">
+<section class="draggable-elements">
+    <div class="row">
+    <div class="col-4"><div class="panel draggable" draggable="true" id="one">Crop 1</div></div>
+    <div class="col-4"><div class="panel draggable" draggable="true" id="two">Crop 2</div></div>
+    <div class="col-4"><div class="panel draggable" draggable="true" id="three">Crop 3</div></div>
+    </div>
+  </section>
+
+  <section class="droppable-elements">
+    <div class="row">
+      <div class="col-6">
+        <div class="panel droppable" data-draggable-id="fone"><span>Field 1</span></div>
+      </div>
+      <div class="col-6">
+        <div class="panel droppable" data-draggable-id="ftwo"><span>Field 2</span></div>
+      </div>
+    <div class="w-100"></div>
+    <div class="col-6">
+      <div class="panel droppable" data-draggable-id="fthree"><span>Field 3</span></div>
+    </div>
+    <div class="col-6">
+      <div class="panel droppable" data-draggable-id="ffour"><span>Field 4</span></div>
+    </div>
+      <div class="w-100"></div>
+      <div class="col-6">
+        <div class="panel droppable" data-draggable-id="ffive"><span>Field 5</span></div>
+      </div>
+      <div class="col-6">
+        <div class="panel droppable" data-draggable-id="fsix"><span>Field 6</span></div>
+      </div>
+    </div>
+  </section>
+  </div>
+<script src='{% static "dragdrop.js" %}'></script>
