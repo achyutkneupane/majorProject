@@ -14,6 +14,7 @@ droppableElements.forEach(elem => {
 
 function dragStart(event) {
   event.dataTransfer.setData("text", event.target.innerHTML); 
+  event.dataTransfer.setData("idGet", event.target.id); 
 }
 
 function dragEnter(event) {
@@ -37,5 +38,8 @@ function dragLeave(event) {
 function drop(event) {
   event.preventDefault();
   const draggableElementData = event.dataTransfer.getData("text");
+  const draggableElementId = event.dataTransfer.getData("idGet");
+  const nameid = event.target.id;
+  document.getElementById(event.target.id).value = draggableElementId;
   event.target.innerHTML = draggableElementData;
 }
