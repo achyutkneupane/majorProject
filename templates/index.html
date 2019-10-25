@@ -6,15 +6,16 @@
     $(document).ready(
  function() {
  setInterval(function() {
-   var text = '{{ ftext }}'
-  $('#sensor').text(text);
- }, 2000);
+  $('#sensor').load("{% url 'sensorUp' %}");
+ }, 10000);
 });
 </script>
 
 <div class="container text-center">
-  <div class="col-12 panel" id="sensor">
-      {{ text }}
+  <div class="col-12 panel">
+    <h2 id="sensor">
+        {% include 'data.html' %}
+    </h2>
   </div>
   {% if ftext == '0' %}
   {% include 'field_empty.html' %}

@@ -9,7 +9,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     url(r'^$', views.homepage, name='home'),
     url(r'^admin/', admin.site.urls),
-    url(r'^field/', views.storesField, name='storeField'),
-    url(r'^t', views.stopF, name='stopF'),
+    url(r'^start/', views.storesField, name='storeField'),
+    url(r'^stop/', views.stopF, name='stopF'),
+    url(r'^sensor/', views.sensorUp, name='sensorUp'),   
 ]
 urlpatterns += staticfiles_urlpatterns()
