@@ -1,6 +1,6 @@
 <form name="field" method="POST" action="{% url 'storeField' %}">
     {% csrf_token %}
-{%load static from staticfiles %}
+{% load static from staticfiles %}
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
 <link rel='stylesheet' href="{% static 'style.css' %}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -18,9 +18,19 @@
         		document.getElementById('Button').disabled = false;
         }
     }
+    $(document).ready(
+ function() {
+ setInterval(function() {
+   var text = "Test"
+  $('#sensor').text(text);
+ }, 1000);
+});
 </script>
 
 <div class="container text-center">
+  <div class="col-12 panel" id="sensor">
+      {{ text }}
+  </div>
     <section class="draggable-elements">
       <div class="row">
       <div class="col-4"><div class="panel draggable" draggable="true" id="cone">Crop 1</div></div>
