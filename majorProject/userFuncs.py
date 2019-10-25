@@ -44,3 +44,15 @@ def getSensor():
     for data in sensor:
         senData = "Temperature: " + data[0] + " Humidity: " + data[1]
     return senData
+
+def fieldData():
+    fData = '0'
+    cur.execute("SELECT * FROM field WHERE op = 'running' ORDER BY id DESC LIMIT 1")
+    field = cur.fetchall()
+    for data in field:
+        if(data[8] != "stopped"):
+            fxData = data[1] + " " + data[2] + " " + data[3] + " " + data[4] + " " + data[5] + " " + data[6]
+            fData = fxData.split()
+        else:
+            fData = '0'
+    return fData

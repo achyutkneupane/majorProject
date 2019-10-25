@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .userFuncs import fieldForm
 from .userFuncs import sensorFunc
 from .userFuncs import getSensor
+from .userFuncs import fieldData
 import serial
 import psycopg2
 from datetime import datetime
@@ -12,10 +13,11 @@ conn = psycopg2.connect("host=localhost dbname=postgres user=achyut password=neu
 cur = conn.cursor()
 now = datetime.now()
 ser = serial.Serial('/dev/ttyACM0', 9600)
+getSenText = getSensor()
+getFlText = fieldData()
 
 def homepage(request):
-    getSenText = getSensor()
-    return render(request, 'index.html', {'text': getSenText})
+    return render(request, 'index.html', {'text': getSenText, 'ftext': getFlText})
 
 def storesField(request):
     if request.method == "POST":
@@ -31,8 +33,8 @@ def storesField(request):
             cur.execute("insert into field(fone,ftwo,fthree,ffour,ffive,fsix,time,op) values(%s,%s,%s,%s,%s,%s,%s,%s)", (fone,ftwo,fthree,ffour,ffive,fsix,now,'running'))
             ser.write(fone.encode() + " " + ftwo.encode() + " " + fthree.encode() + " " + ffour.encode() + " " + ffive.encode() + " " + fsix.encode())
     conn.commit()
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'text': getSenText, 'ftext': getFlText})
 
-def test(request):
-    getSenText = getSensor()
-    return getSenText
+def stopF(request):
+    cur.execute("UPDATE field SET op = 'stopped'")
+    return render(request, 'index.html', {'text': getSenText, 'ftext': getFlText})

@@ -10,6 +10,6 @@ urlpatterns = [
     url(r'^$', views.homepage, name='home'),
     url(r'^admin/', admin.site.urls),
     url(r'^field/', views.storesField, name='storeField'),
-    url(r'^$', userFuncs.getSensor, name='sensordata')
+    url(r'^t', views.stopF, name='stopF'),
 ]
 urlpatterns += staticfiles_urlpatterns()

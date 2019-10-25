@@ -1,0 +1,24 @@
+{% load static from staticfiles %}
+
+<section class="droppable-elements">
+  <div class="row">
+        {% for fs in ftext %}
+        <div class="col-6">
+                <div class="panel droppable"><span>
+        {% if fs == 'cone' %}
+        Crop 1
+        {% elif fs == 'ctwo' %}
+        Crop 2
+        {% elif fs == 'cthree' %}
+        Crop 3
+        {% endif %}
+                </span></div>
+        </div>
+        {% endfor %}
+  </div>
+</section>
+<form action="{% url 'stopF' %}" method="POST">
+        {% csrf_token %}
+    <input type='submit' name='stop' value='Stop' onclick="return confirm('Stop?')">
+</form>
+    
