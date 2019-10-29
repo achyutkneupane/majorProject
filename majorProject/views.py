@@ -8,13 +8,21 @@ import serial
 import psycopg2
 from datetime import datetime
 import serial.tools.list_ports
+from team.models import Member
 
 arduino = '/dev/ttyACM0'
 
 def homepage(request):
     getSenText = getSensor()
     getFlText = fieldData()
-    return render(request, 'index.html', {'text': getSenText, 'ftext': getFlText})
+    members = Member.objects.all().values()
+    context = {
+        'team':members,
+        'text': getSenText,
+        'ftext': getFlText,
+        'project': 'Project Name'
+    }
+    return render(request, 'index.html', context= context)
 
 def storesField(request):
     conn = psycopg2.connect("host=localhost dbname=postgres user=achyut password=neupane1")
@@ -35,7 +43,7 @@ def storesField(request):
             cur.execute("insert into field(fone,ftwo,fthree,ffour,ffive,fsix,time,op) values(%s,%s,%s,%s,%s,%s,%s,%s)", (fone,ftwo,fthree,ffour,ffive,fsix,now,'running'))
             ser.write(fone.encode() + " " + ftwo.encode() + " " + fthree.encode() + " " + ffour.encode() + " " + ffive.encode() + " " + fsix.encode())
             conn.commit()
-    return render(request, 'redirect_to_home.html', {'text': getSenText, 'ftext': getFlText})
+    return render(request, 'redirect_to_home.html')
 
 def stopF(request):
     conn = psycopg2.connect("host=localhost dbname=postgres user=achyut password=neupane1")
@@ -45,7 +53,7 @@ def stopF(request):
     getFlText = fieldData()
     cur.execute("UPDATE field SET op = 'stopped'")
     conn.commit()
-    return render(request, 'redirect_to_home.html', {'text': getSenText, 'ftext': getFlText})
+    return render(request, 'redirect_to_home.html')
 
 def sensorUp(request):
     getSenText = getSensor()

@@ -28,7 +28,7 @@ def sensorFunc():
             cur.execute("insert into sensor(tempr,hum,time) values(%s,%s,%s)", (tempr,hum,now))
             conn.commit()
     except serial.serialutil.SerialException:
-        pass
+        return "Serial Connection Error"
     except IndexError:
         pass
     except ValueError:
@@ -39,16 +39,19 @@ def sensorFunc():
         pass
 
 def getSensor():
-    conn = psycopg2.connect("host=localhost dbname=postgres user=achyut password=neupane1")
-    cur = conn.cursor()
-    ser = serial.Serial(arduino, 9600)
-    sensorFunc()
-    cur.execute("SELECT tempr,hum FROM sensor ORDER BY id DESC LIMIT 1")
-    sensor = cur.fetchall()
-    for data in sensor:
-        senData = "Temperature: " + data[0] + " Humidity: " + data[1]
-    return senData
-    conn.commit()
+    try:
+        conn = psycopg2.connect("host=localhost dbname=postgres user=achyut password=neupane1")
+        cur = conn.cursor()
+        ser = serial.Serial(arduino, 9600)
+        sensorFunc()
+        cur.execute("SELECT tempr,hum FROM sensor ORDER BY id DESC LIMIT 1")
+        sensor = cur.fetchall()
+        for data in sensor:
+            senData = "Temperature: " + data[0] + " Humidity: " + data[1]
+        return senData
+        conn.commit()
+    except serial.serialutil.SerialException:
+        return "Serial Connection Error"
 
 def fieldData():
     conn = psycopg2.connect("host=localhost dbname=postgres user=achyut password=neupane1")

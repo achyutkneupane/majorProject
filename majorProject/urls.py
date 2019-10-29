@@ -12,5 +12,4 @@ urlpatterns = [
     url(r'^start/', views.storesField, name='storeField'),
     url(r'^stop/', views.stopF, name='stopF'),
     url(r'^sensor/', views.sensorUp, name='sensorUp'),   
-]
-urlpatterns += staticfiles_urlpatterns()
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

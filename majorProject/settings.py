@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['localhost','127.0.0.1','192.168.100.70']
 # Application definition
 
 INSTALLED_APPS = [
+    'team.apps.TeamConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -129,3 +130,7 @@ STATICFILES_DIRS=(
     os.path.join(BASE_DIR, 'static'),
 )
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'

@@ -1,5 +1,6 @@
 {% load static from staticfiles %}
 
+<div class="field">
 <section class="droppable-elements">
   <div class="row">
         {% for fs in ftext %}
@@ -21,4 +22,4 @@
         {% csrf_token %}
     <input type='submit' name='stop' value='Stop' onclick="return confirm('Stop?')">
 </form>
-    
+

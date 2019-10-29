@@ -1,13 +1,10 @@
-body {
-  margin: 4rem 0;
-}
 
 .panel {
   border: 1px solid #000000;
   background-color: #c3c3c3;
-  border-radius: 1em;
-  padding: 1rem;
-  margin-bottom: 1rem;
+  border-radius: 5rem;
+  padding: .5rem;
+  margin-bottom: .5rem;
 }
 
 .draggable-elements {
@@ -16,4 +13,22 @@ body {
 
 .droppable-elements {
   color: #000;
+}
+
+.field{
+  width: 70%;
+  margin:0 auto;
+  margin-top: 1rem;
+}
+
+.team {
+  height: 150px;
+  width: 70%;
+  margin:0 auto;
+  margin-top: .2rem;
+  margin-bottom: -1rem;
+}
+
+.card-roll {
+  margin-bottom: -1rem;
 }
