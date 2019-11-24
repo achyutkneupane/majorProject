@@ -3,7 +3,7 @@
 
 <body>
   <header>
-  <nav class="navbar navbarextend-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="#">{{ project }}</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -37,14 +37,26 @@
   <div class="card-deck field">
 {% for members in team %}
 
-    <div class="card">
-      <img class="card-img-top img-fluid team img-thumbnail rounded-circle" src="media/{{ members.image }}" alt="{{ members.name }}">
+    <div class="card" data-toggle="modal"  data-target=".team-modal-{{ members.roll }}" style="cursor: pointer;">
       <div class="card-body">
         <h4 class="card-title">{{ members.fname }}<br>{{ members.lname }}</h4>
         <span class="card-roll">{{ members.roll }}</span>
       </div>
     </div>
 
+    <div class="modal fade team-modal-{{ members.roll }}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+          <img class="card-img-top img-fluid img-thumbnail rounded-circle" src="media/{{ members.image }}" alt="{{ members.name }}">
+          <div class="card-roll">
+            <b>Name:</b> {{ members.fname }} {{members.lname}}<br>
+            <b>Roll No.:</b> {{members.roll}}<br>
+            <b>Contact No.:</b> {{members.contact}}<br>
+            <b>Email Address:</b><br><a href="mailto:{{members.email}}">{{members.email}}</a><br>
+          </div>
+        </div>
+      </div>
+    </div>
 {% endfor %}
 
 </div>
