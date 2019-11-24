@@ -9,6 +9,8 @@ import psycopg2
 from datetime import datetime
 import serial.tools.list_ports
 from team.models import Member
+from django.http import StreamingHttpResponse
+from camera import VideoCamera, gen
 
 arduino = '/dev/ttyACM0'
 
@@ -58,3 +60,6 @@ def stopF(request):
 def sensorUp(request):
     getSenText = getSensor()
     return render(request, 'data.html', {'text': getSenText})
+
+def camera(request):
+    return StreamingHttpResponse(gen(VideoCamera()),content_type='multipart/x-mixed-replace; boundary=frame')

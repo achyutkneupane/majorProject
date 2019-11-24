@@ -2,23 +2,20 @@
 {% block content %}
 
 <body>
-  <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">{{ project }}</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav ml-auto">
-          <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link" href="#">Features</a>
-          <a class="nav-item nav-link" href="#">Pricing</a>
-          <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </div>
-      </div>
-  </nav>
-</header>
+    
+  <div class="card" data-toggle="modal"  data-target=".camera" style="cursor: pointer;">
+    <div class="card-body">
+Open Camera
+    </div>
+  </div>
 
+  <div class="modal fade camera" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="cam">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content" id="cam">
+        <img src="http://{{ request.get_host }}/monitor">
+      </div>
+    </div>
+  </div>
 <div class="container text-center field">
   <div class="col-12 panel">
     <h4 id="sensor">

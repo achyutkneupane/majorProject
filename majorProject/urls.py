@@ -14,5 +14,5 @@ urlpatterns = [
     url(r'^start/', views.storesField, name='storeField'),
     url(r'^stop/', views.stopF, name='stopF'),
     url(r'^sensor/', views.sensorUp, name='sensorUp'),
-    url(r'monitor/', lambda r: StreamingHttpResponse(gen(VideoCamera()),content_type='multipart/x-mixed-replace; boundary=frame')),
+    url(r'^monitor/', views.camera, name='camera'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
