@@ -1,8 +1,24 @@
 #include <string.h>
+#include <Stepper.h>
 int a[2],n=0,value;
+const int steps=200;
+Stepper sx(steps,8,9,10,13);
+Stepper sy(steps,14,15,16,17);
+Stepper sz(steps,23,25,27,29);
 void setup() {
 Serial.begin(9600);
-Serial.println("Enter\n");
+pinMode(11,OUTPUT);
+pinMode(12,OUTPUT);
+pinMode(23,OUTPUT);
+pinMode(24,OUTPUT);
+pinMode(35,OUTPUT);
+pinMode(36,OUTPUT);
+pinMode(3,INPUT);
+pinMode(4,INPUT);
+pinMode(5,INPUT);
+sx.setSpeed(80);
+sy.setSpeed(80);
+sz.setSpeed(100);
 }
 
 void loop() {
@@ -15,13 +31,13 @@ void loop() {
 void pickSeed(int s) {
   int y;
 switch(s) {
-  case 1:
+  case 3:
     y=1200;
     break;
   case 2:
     y=0;
     break;
-  case 3:
+  case 1:
     y=-1200;
     break;
 }
@@ -33,11 +49,11 @@ switch(s) {
 void plantSeed(int f) {
   int x,y;
   switch(f) {
-    case 1:
+    case 5:
     x=-1200;
     y=1200;
     break;
-    case 2:
+    case 6:
     x=-2600;
     y=1200;
     break;
@@ -49,11 +65,11 @@ void plantSeed(int f) {
     x=-2600;
     y=0;
     break;
-    case 5:
+    case 1:
     x=-1200;
     y=-1200;
     break;
-    case 6:
+    case 2:
     x=-2600;
     y=-1200;
     break;
@@ -64,23 +80,17 @@ void plantSeed(int f) {
 }
 
 void move(int x,int y,int z) {
-   Serial.print("x:");
-   Serial.println(x);
+   sx.step(x);
    delay(10);
-   Serial.print("y:");
-   Serial.println(y);
+   sy.step(y);
    delay(10);
-   Serial.print("z:");
-   Serial.println(z);
+   sz.step(z);
    delay(10);
-   Serial.print("z:");
-   Serial.println(-z);
+   sz.step(-z);
    delay(10);
-   Serial.print("y:");
-   Serial.println(-y);
+   sy.step(-y);
    delay(10);
-   Serial.print("x:");
-   Serial.println(-x);
+   sx.step(-x);
 }
 
  void callfunc(int value) {
