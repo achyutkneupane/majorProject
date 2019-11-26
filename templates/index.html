@@ -3,21 +3,23 @@
 
 <body>
     
-  <div class="card" data-toggle="modal"  data-target=".camera" style="cursor: pointer;">
-    <div class="card-body">
-Open Camera
-    </div>
-  </div>
-
-  <div class="modal fade camera" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="cam">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-      <div class="modal-content" id="cam">
-        <img src="http://{{ request.get_host }}/monitor">
+    <div class="card col-lg-12" data-toggle="modal" data-target=".cameraa" style="cursor: pointer;">
+        <div class="card-body col-lg-12 text-center">
+          Open Camera
+        </div>
+      </div>
+  <div class="modal fade cameraa" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="card-roll">
+              <img src="http://{{ request.get_host }}/monitor">
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+
 <div class="container text-center field">
-  <div class="col-12 panel">
+  <div class="col-lg-12 panel">
     <h4 id="sensor">
         {% include 'data.html' %}
     </h4>
@@ -28,13 +30,12 @@ Open Camera
   {% include 'field_done.html' %}
   {% endif %}
 </div>
-
+<br><br>
 <div class="container text-center">
   <h4>Team Members</h4>
-  <div class="card-deck field">
+<div class="row field">
 {% for members in team %}
-
-    <div class="card" data-toggle="modal"  data-target=".team-modal-{{ members.roll }}" style="cursor: pointer;">
+    <div class="card col-lg-3" data-toggle="modal" data-target=".team-modal-{{ members.roll }}" style="cursor: pointer;">
       <div class="card-body">
         <h4 class="card-title">{{ members.fname }}<br>{{ members.lname }}</h4>
         <span class="card-roll">{{ members.roll }}</span>
@@ -42,7 +43,7 @@ Open Camera
     </div>
 
     <div class="modal fade team-modal-{{ members.roll }}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <img class="card-img-top img-fluid img-thumbnail rounded-circle" src="media/{{ members.image }}" alt="{{ members.name }}">
           <div class="card-roll">
@@ -55,7 +56,6 @@ Open Camera
       </div>
     </div>
 {% endfor %}
-
 </div>
 </div>
 

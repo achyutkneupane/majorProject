@@ -52,6 +52,8 @@ def getSensor():
         conn.commit()
     except serial.serialutil.SerialException:
         return "Serial Connection Error"
+    except UnboundLocalError:
+        pass
 
 def fieldData():
     conn = psycopg2.connect("host=localhost dbname=postgres user=achyut password=neupane1")

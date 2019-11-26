@@ -30,6 +30,7 @@ def storesField(request):
     conn = psycopg2.connect("host=localhost dbname=postgres user=achyut password=neupane1")
     cur = conn.cursor()
     now = datetime.now()
+    ser = serial.Serial(arduino, 9600)
     getSenText = getSensor()
     getFlText = fieldData()
     if request.method == "POST":
@@ -43,7 +44,18 @@ def storesField(request):
             ffive = fieldsForm.cleaned_data['ffive']
             fsix = fieldsForm.cleaned_data['fsix']
             cur.execute("insert into field(fone,ftwo,fthree,ffour,ffive,fsix,time,op) values(%s,%s,%s,%s,%s,%s,%s,%s)", (fone,ftwo,fthree,ffour,ffive,fsix,now,'running'))
-            ser.write(fone.encode() + " " + ftwo.encode() + " " + fthree.encode() + " " + ffour.encode() + " " + ffive.encode() + " " + fsix.encode())
+            """ fone = fone*10+1
+            ftwo = ftwo*10+2
+            fthree = fthree*10+3
+            ffour = ffour*10+4
+            ffive = ffive*10+5
+            fsix = fsix*10+6 """
+            ser.write(fone.encode())
+            ser.write(ftwo.encode())
+            ser.write(fthree.encode())
+            ser.write(ffour.encode())
+            ser.write(ffive.encode())
+            ser.write(fsix.encode())
             conn.commit()
     return render(request, 'redirect_to_home.html')
 
@@ -62,4 +74,8 @@ def sensorUp(request):
     return render(request, 'data.html', {'text': getSenText})
 
 def camera(request):
-    return StreamingHttpResponse(gen(VideoCamera()),content_type='multipart/x-mixed-replace; boundary=frame')
+    cameraa = StreamingHttpResponse(gen(VideoCamera()),content_type='multipart/x-mixed-replace; boundary=frame')
+    try:
+        return cameraa
+    except AttributeError:
+        pass

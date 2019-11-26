@@ -1,60 +1,67 @@
 <form name="field" method="POST" action="{% url 'storeField' %}">
-{% csrf_token %}
-{% load static from staticfiles %}
-<script type="text/javascript">
-    function check() {
-        var fone = document.getElementById('fone').value;
-        var ftwo = document.getElementById('ftwo').value;
-        var fthree = document.getElementById('fthree').value;
-        var ffour = document.getElementById('ffour').value;
-        var ffive = document.getElementById('ffive').value;
-        var fsix = document.getElementById('fsix').value;
-        if (fone == "" || ftwo == "" || fthree == "" || ffour == "" || ffive == "" || fsix == "") {
-            document.getElementById('Button').disabled = true;
-        } else {
-        		document.getElementById('Button').disabled = false;
+    {% csrf_token %}
+    {% load static from staticfiles %}
+    <script type="text/javascript">
+        function check() {
+            var fone = document.getElementById('fone').value;
+            var ftwo = document.getElementById('ftwo').value;
+            var fthree = document.getElementById('fthree').value;
+            var ffour = document.getElementById('ffour').value;
+            var ffive = document.getElementById('ffive').value;
+            var fsix = document.getElementById('fsix').value;
+            if (fone == "" || ftwo == "" || fthree == "" || ffour == "" || ffive == "" || fsix == "") {
+                document.getElementById('Button').disabled = true;
+            } else {
+                    document.getElementById('Button').disabled = false;
+            }
         }
-    }
-    </script>
-  
-<section class="draggable-elements">
-        <div class="row">
-        <div class="col-4"><div class="panel draggable" draggable="true" id="cone">Crop 1</div></div>
-        <div class="col-4"><div class="panel draggable" draggable="true" id="ctwo">Crop 2</div></div>
-        <div class="col-4"><div class="panel draggable" draggable="true" id="cthree">Crop 3</div></div>
-        </div>
-      </section>
+        </script>
       
-      <section class="droppable-elements">
+    <div class="container">
         <div class="row">
-          <div class="col-6">
-              <input type='hidden' id="fone" name='fone' value=''>
-            <div class="panel droppable" data-draggable-id="fone" id="fone"><span>Field 1</span></div>
-          </div>
-          <div class="col-6">
-              <input type='hidden' id="ftwo" name='ftwo' value=''>
-            <div class="panel droppable" data-draggable-id="ftwo" id="ftwo"><span>Field 2</span></div>
-          </div>
-        <div class="w-100"></div>
-        <div class="col-6">
-            <input type='hidden' id="fthree" name='fthree' value=''>
-          <div class="panel droppable" data-draggable-id="fthree" id="fthree"><span>Field 3</span></div>
+            <select name="fone" class="panel col-lg-6">
+                <option value="" disabled selected>Field 1</option>
+                <option value="1">Crop 1</option>
+                <option value="2">Crop 2</option>
+                <option value="3">Crop 3</option>
+            </select>
+            <select name="ftwo" class="panel col-lg-6">
+                <option value="" disabled selected>Field 2</option>
+                <option value="1">Crop 1</option>
+                <option value="2">Crop 2</option>
+                <option value="3">Crop 3</option>
+            </select>
         </div>
-        <div class="col-6">
-            <input type='hidden' id="ffour" name='ffour' value=''>
-          <div class="panel droppable" data-draggable-id="ffour" id="ffour"><span>Field 4</span></div>
+        <div class="row">
+            <select name="fthree" class="panel col-lg-6">
+                <option value="" disabled selected>Field 3</option>
+                <option value="1">Crop 1</option>
+                <option value="2">Crop 2</option>
+                <option value="3">Crop 3</option>
+            </select>
+            <select name="ffour" class="panel col-lg-6">
+                <option value="" disabled selected>Field 4</option>
+                <option value="1">Crop 1</option>
+                <option value="2">Crop 2</option>
+                <option value="3">Crop 3</option>
+            </select>
         </div>
-          <div class="w-100"></div>
-          <div class="col-6">
-              <input type='hidden' id="ffive" name='ffive' value=''>
-            <div class="panel droppable" data-draggable-id="ffive" id="ffive"><span>Field 5</span></div>
-          </div>
-          <div class="col-6">
-            <input type='hidden' id="fsix" name='fsix' value=''>
-            <div class="panel droppable" data-draggable-id="fsix" id="fsix"><span>Field 6</span></div>
-          </div>
+        <div class="row">
+            <select name="ffive" class="panel col-lg-6">
+                <option value="" disabled selected>Field 5</option>
+                <option value="1">Crop 1</option>
+                <option value="2">Crop 2</option>
+                <option value="3">Crop 3</option>
+            </select>
+            <select name="fsix" class="panel col-lg-6">
+                <option value="" disabled selected>Field 6</option>
+                <option value="1">Crop 1</option>
+                <option value="2">Crop 2</option>
+                <option value="3">Crop 3</option>
+            </select>
         </div>
-      </section>
-    <input type="submit" name="submit" value="Start" id="Button" onmouseover="check()" disabled>
-    </form>
-  <script src='{% static "dragdrop.js" %}'></script>
+    </div>
+    
+        <input type="submit" name="submit" value="Start" id="Button" onmouseover="check()">
+        </form>
+      <script src='{% static "dragdrop.js" %}'></script>
