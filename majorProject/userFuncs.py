@@ -22,7 +22,7 @@ def getSensor():
         cur.execute("SELECT tempr,hum FROM sensor ORDER BY id DESC LIMIT 1")
         sensor = cur.fetchall()
         for data in sensor:
-            senData = "Temperature: " + data[0] + " Humidity: " + data[1]
+            senData = "Temperature: " + data[0] + " Humidity: " + data[1] + "\n Soil Moisture: " + data[2]
         return senData
         conn.commit()
     except UnboundLocalError:

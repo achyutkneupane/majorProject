@@ -77,8 +77,9 @@ def sensorFunc():
         x = line.split(" ")
         tempr = int(round(float(x[0])))
         hum = int(round(float(x[1])))
+        mois = int(round(float(x[2])))
         if(0<=tempr<=50 and 20<=hum<=90):
-            cur.execute("insert into sensor(tempr,hum,time) values(%s,%s,%s)", (tempr,hum,now))
+            cur.execute("insert into sensor(tempr,hum,mois,time) values(%s,%s,%s)", (tempr,hum,now))
             conn.commit()
     except serial.serialutil.SerialException:
         return "Serial Connection Error"
