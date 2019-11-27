@@ -11,32 +11,21 @@ Stepper sy(steps,14,15,16,17);
 Stepper sz(steps,23,25,27,29);
 void setup() {
 Serial.begin(9600);
-pinMode(11,OUTPUT);
-pinMode(12,OUTPUT);
-pinMode(23,OUTPUT);
-pinMode(24,OUTPUT);
-pinMode(35,OUTPUT);
-pinMode(36,OUTPUT);
-pinMode(3,INPUT);
-pinMode(4,INPUT);
-pinMode(5,INPUT);
 sx.setSpeed(80);
 sy.setSpeed(80);
 sz.setSpeed(100);
 }
 
 void loop() {
+  dhts();
   if (Serial.available() > 0) {
- value = Serial.read();
+ value = Serial.read()-48;
  callfunc(value);
 }
 }
 
 void pickSeed(int s) {
   int y;
-  
-    Serial.print("Picking from: ");
-    Serial.println(s);
 switch(s) {
   case 3:
     y=1200;
@@ -48,15 +37,10 @@ switch(s) {
     y=-1200;
     break;
 }
-    move(0,y,2500);
-    Serial.print("Picked from: ");
-    Serial.println(s);
+    move(0,y,2400);
 }
 
 void plantSeed(int f) {
-  
-    Serial.print("Planting in: ");
-    Serial.println(f);
   int x,y;
   switch(f) {
     case 5:
@@ -84,9 +68,7 @@ void plantSeed(int f) {
     y=-1200;
     break;
   }
-  move(x,y,2500);
-    Serial.print("Planted in: ");
-    Serial.println(f);
+  move(x,y,6000);
 }
 
 void move(int x,int y,int z) {
@@ -108,8 +90,9 @@ void dhts() {
 Serial.print(DHT.temperature);
 Serial.print(' ');
 Serial.println(DHT.humidity);
-delay(1000);
+delay(2000);
 }
+
  void callfunc(int value) {
  int digit = value % 10;
  value /= 10;
