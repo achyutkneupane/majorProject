@@ -41,9 +41,8 @@ switch(s) {
     y=-700;
     break;
 }
-    move(0,y,2300);
+    move(0,y,1500);
     picker();
-    movei(0,y,2300);
 }
 
 void plantSeed(int f) {
@@ -75,7 +74,7 @@ void plantSeed(int f) {
     break;
   }
   move(x,y,5000);
-  picker();
+  planter();
   movei(x,y,5000);
 }
 
@@ -92,7 +91,7 @@ void movei(int x,int y,int z) {
    delay(10);
    sy.step(-y);
    delay(10);
-   sz.step(-x);
+   sx.step(-x);
    delay(10);
 }
 
@@ -105,7 +104,7 @@ Serial.print(DHT.humidity);
 Serial.print(' ');
 Serial.println(mois);
 if(mois <= 300) {
- //waterr();
+ // waterr();
 }
 delay(2000);
 }
@@ -115,12 +114,23 @@ void picker() {
     myservo.write(pos);
     delay(15);
     }
+    move(0,0,800);
+    for (pos = 0; pos <= 180; pos += 1) {
+    myservo.write(pos); 
+    delay(15);
+    }
+    movei(0,0,2300);
+}
+void planter() {
+    for (pos = 180; pos >= 0; pos -= 1) { 
+    myservo.write(pos);
+    delay(15);
+    }
     for (pos = 0; pos <= 180; pos += 1) {
     myservo.write(pos); 
     delay(15);
     }
 }
-
 void waterr() {
   move(-1000,-1600,5000);
   digitalWrite(water,HIGH);
@@ -132,26 +142,28 @@ void waterr() {
   delay(10000);
   digitalWrite(water,LOW);
   movei(0,0,1000);
-  move(2200,1600,1000);
+  move(0,1600,1000);
   digitalWrite(water,HIGH);
   delay(10000);
   digitalWrite(water,LOW);
   movei(0,0,1000);
-  move(-2200,0,1000);
+  move(0,1600,1000);
   digitalWrite(water,HIGH);
   delay(10000);
   digitalWrite(water,LOW);
   movei(0,0,1000);
-  move(2200,1600,1000);
+  move(2200,0,1000);
   digitalWrite(water,HIGH);
   delay(10000);
   digitalWrite(water,LOW);
   movei(0,0,1000);
-  move(-2200,0,1000);
+  move(0,-1600,1000);
   digitalWrite(water,HIGH);
   delay(10000);
   digitalWrite(water,LOW);
-  movei(-3200,1600,5000);
+  movei(0,0,5000);
+  move(1000,0,0);
+  delay(10000);
 }
 
  void callfunc(int value) {
