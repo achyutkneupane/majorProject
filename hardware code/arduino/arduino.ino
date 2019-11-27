@@ -5,7 +5,7 @@
 #include <Servo.h>
 Servo myservo;
 dht DHT;
-int a[2],n=0,value,pos=0,soil=A7;
+int a[2],n=0,value,pos=0,soil=A7,water=33;
 const int steps=200;
 Stepper sx(steps,8,9,10,13);
 Stepper sy(steps,14,15,16,17);
@@ -13,11 +13,11 @@ Stepper sz(steps,23,25,27,29);
 void setup() {
 Serial.begin(9600);
 myservo.attach(2);
-sx.setSpeed(80);
+sx.setSpeed(90);
 sy.setSpeed(80);
 sz.setSpeed(100);
 pinMode(soil, INPUT);
-pinMode(33,OUTPUT);
+pinMode(water,OUTPUT);
 }
 
 void loop() {
@@ -32,51 +32,51 @@ void pickSeed(int s) {
   int y;
 switch(s) {
   case 3:
-    y=1200;
+    y=700;
     break;
   case 2:
     y=0;
     break;
   case 1:
-    y=-1200;
+    y=-700;
     break;
 }
-    move(0,y,2400);
+    move(0,y,2300);
     picker();
-    movei(0,y,2400);
+    movei(0,y,2300);
 }
 
 void plantSeed(int f) {
   int x,y;
   switch(f) {
-    case 5:
-    x=-1200;
-    y=1200;
+    case 1:
+    x=-1000;
+    y=-1600;
     break;
-    case 6:
-    x=-3500;
-    y=1200;
+    case 2:
+    x=-3200;
+    y=-1600;
     break;
     case 3:
-    x=-1200;
+    x=-1000;
     y=0;
     break;
     case 4:
-    x=-3500;
+    x=-3200;
     y=0;
     break;
-    case 1:
-    x=-1200;
-    y=-1200;
+    case 5:
+    x=-1000;
+    y=1600;
     break;
-    case 2:
-    x=-3500;
-    y=-1200;
+    case 6:
+    x=-3200;
+    y=1600;
     break;
   }
-  move(x,y,6000);
+  move(x,y,5000);
   picker();
-  movei(x,y,6000);
+  movei(x,y,5000);
 }
 
 void move(int x,int y,int z) {
@@ -88,7 +88,7 @@ void move(int x,int y,int z) {
    delay(10);
 }
 void movei(int x,int y,int z) {
-   sx.step(-z);
+   sz.step(-z);
    delay(10);
    sy.step(-y);
    delay(10);
@@ -104,20 +104,54 @@ Serial.print(' ');
 Serial.print(DHT.humidity);
 Serial.print(' ');
 Serial.println(mois);
+if(mois <= 300) {
+ //waterr();
+}
 delay(2000);
 }
 
 void picker() {
+    for (pos = 180; pos >= 0; pos -= 1) { 
+    myservo.write(pos);
+    delay(15);
+    }
     for (pos = 0; pos <= 180; pos += 1) {
     myservo.write(pos); 
     delay(15);
     }
-    move(0,0,50);
-    for (pos = 180; pos >= 0; pos -= 1) { 
-    myservo.write(pos);
-    delay(15);
-    move(0,0,-50);
-    }
+}
+
+void waterr() {
+  move(-1000,-1600,5000);
+  digitalWrite(water,HIGH);
+  delay(10000);
+  digitalWrite(water,LOW);
+  movei(0,0,1000);
+  move(-2200,0,1000);
+  digitalWrite(water,HIGH);
+  delay(10000);
+  digitalWrite(water,LOW);
+  movei(0,0,1000);
+  move(2200,1600,1000);
+  digitalWrite(water,HIGH);
+  delay(10000);
+  digitalWrite(water,LOW);
+  movei(0,0,1000);
+  move(-2200,0,1000);
+  digitalWrite(water,HIGH);
+  delay(10000);
+  digitalWrite(water,LOW);
+  movei(0,0,1000);
+  move(2200,1600,1000);
+  digitalWrite(water,HIGH);
+  delay(10000);
+  digitalWrite(water,LOW);
+  movei(0,0,1000);
+  move(-2200,0,1000);
+  digitalWrite(water,HIGH);
+  delay(10000);
+  digitalWrite(water,LOW);
+  movei(-3200,1600,5000);
 }
 
  void callfunc(int value) {

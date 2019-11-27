@@ -19,10 +19,10 @@ def getSensor():
         conn = psycopg2.connect("host=localhost dbname=postgres user=achyut password=neupane1")
         cur = conn.cursor()
         views.sensorFunc()
-        cur.execute("SELECT tempr,hum FROM sensor ORDER BY id DESC LIMIT 1")
+        cur.execute("SELECT tempr,hum,mois FROM sensor ORDER BY id DESC LIMIT 1")
         sensor = cur.fetchall()
         for data in sensor:
-            senData = "Temperature: " + data[0] + " Humidity: " + data[1] + "\n Soil Moisture: " + data[2]
+            senData = "Temperature: " + data[0] + " Humidity: " + data[1] + "\nSoil Moisture: " + data[2]
         return senData
         conn.commit()
     except UnboundLocalError:
